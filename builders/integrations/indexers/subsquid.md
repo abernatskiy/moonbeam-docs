@@ -86,6 +86,8 @@ Create a EVM Subsquid project and configure it for Moonbeam:
 
 Your new Subsquid indexer is now configured to use Moonbeam data. Get started with the development by following the [EVM quickstart guide](https://docs.subsquid.io/quickstart/quickstart-ethereum/){target=_blank}.
 
+[//]: # (???? Consider adding an end-to-end EVM tutorial)
+
 #### Autogenerating an EVM-native indexer {: #autogenerating-an-evm-native-indexer }
 
 This approach allows for no-code generation of indexers that retrieve EVM transaction and/or event data for Moonbeam/Moonriver/Moonbase contracts. The generated indexers can serve the raw blockchain data via a GraphQL API from a PostgreSQL database or write it to file-based datasets. Proceed as follows:
