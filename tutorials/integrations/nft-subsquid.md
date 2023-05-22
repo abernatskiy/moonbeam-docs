@@ -1,9 +1,9 @@
 ---
-title: Index NFT Transfers with Subsquid
+title: Index NFT Transfers with Subsquid: Substrate-native style
 description: Learn how to use Subsquid, a query node framework for Substrate-based chains, to index and process Substrate and EVM data for Moonbeam and Moonriver.
 ---
 
-# Indexing NFT Transfers on Moonbeam with Subsquid
+# Indexing NFT Transfers on Moonbeam with Subsquid: Substrate-native style
 
 ![Subsquid Banner](/images/tutorials/integrations/nft-subsquid/nft-subsquid-banner.png)
 
@@ -11,13 +11,15 @@ _March 7, 2023 | by Massimo Luraschi_
 
 ## Introduction {: #introduction }
 
-[Subsquid](https://subsquid.io){target=_blank} is a full-stack blockchain indexing SDK with specialized data lakes (Archives) optimized for the extraction of large volumes of historical on-chain data.
+[//]: # (!!!! Redo once the frontier-evm template is simplified)
+
+[Subsquid](https://subsquid.io){target=_blank} is a full-stack blockchain indexing SDK with specialized data lakes (Archives) optimized for extraction of large volumes of historical on-chain data.
 
 The SDK offers a highly customizable Extract-Transform-Load-Query stack and indexing speeds of up to and beyond 50,000 blocks per second when indexing events and transactions.
 
-Subsquid has native and full support for both the Ethereum Virtual Machine and Substrate data. This allows developers to extract on-chain data from any of the Moonbeam networks and process EVM logs as well as Substrate entities (events, extrinsics and storage items) in one single project and serve the resulting data with one single GraphQL endpoint. With Subsquid, filtering by EVM topic, contract address, and block range are all possible.
+Subsquid has native and full support for both the Ethereum Virtual Machine and Substrate data. This allows developers to extract on-chain data from any of the Moonbeam networks and process EVM logs as well as Substrate entities (events, extrinsics and storage items) within the same project and serve the resulting data with a single GraphQL endpoint. With Subsquid, filtering by EVM topic, contract address, and block range are all possible.
 
-This guide will explain how to create a Subsquid project (also known as a *"squid"*) from a template (indexing Moonsama transfers on Moonriver), and change it to index ERC-721 token transfers on the Moonbeam network. As such, you'll be looking at the `Transfer` EVM event topics. This guide can be adapted for Moonbase Alpha as well.
+This guide will explain how to create a [Substrate-native](/builders/integrations/indexers/subsquid){target=_blank} Subsquid project (also known as a *"squid"*) from a template (indexing Moonsama transfers on Moonriver), and change it to index ERC-721 token transfers on the Moonbeam network. As such, you'll be looking at the `Transfer` EVM event topics. This guide can be adapted for Moonbase Alpha as well.
 
 --8<-- 'text/disclaimers/third-party-content-intro.md'
 
@@ -129,7 +131,7 @@ It is in this callback function that all the mapping logic is expressed. This is
 
 Before we begin defining the mapping logic of the squid, we are going to rewrite the `src/contracts.ts` utility module for managing the involved EVM contracts. It will export:
 
-* Addresses of [Gromlins](https://moonscan.io/token/0xf27a6c72398eb7e25543d19fda370b7083474735){target=_blank} contract
+* Address of the [Gromlins](https://moonscan.io/token/0xf27a6c72398eb7e25543d19fda370b7083474735){target=_blank} contract
 * A function that will create and save an instance of the `Contract` entity to the database
 * A function that will return a `Contract` instance (either the already existing one, or a newly created entity). The first time the function is called, it verifies if a `Contract` does exist already, in the negative case, it will invoke the first function, and cache the result, so on subsequent calls the cached version will be returned
 
@@ -139,14 +141,14 @@ Here are the full file contents:
 --8<-- 'code/tutorials/integrations/nft-subsquid/contract.ts'
 ```
 
-You might notice a warning that the `Context` variable hasn't been exported, but don't worry, as we'll export it from the `src/processor.ts` file in the next section.
+You might notice a warning that the `Context` type hasn't been exported, but don't worry, as we'll export it from the `src/processor.ts` file in the next section.
 
 !!! note
     The `createContractEntity` function is accessing the **state** of the contract via a chain RPC endpoint. This is slowing down the indexing a little, but this data is only available this way. You'll find more information on accessing state in the [dedicated section of our docs](https://docs.subsquid.io/substrate-indexing/evm-support#access-the-contract-state){target=_blank}.
 
 ## Configure Processor and Attach Handler {: #configure-processor }
 
-The `src/processor.ts` file is where squids instantiate the processor (a `SubstrateBatchProcessor` in our case), configure it and attach the handler functions.
+The `src/processor.ts` file is where squids instantiate the processor (a `SubstrateBatchProcessor` in our case), configure it and attach the handler function.
 
 Not much needs to be changed here, except adapting the template code to handle the Gromlins contract and setting the processor to use the `moonbeam` archive URL retrieved from the [archive registry](https://github.com/subsquid/archive-registry){target=_blank}.
 
@@ -277,15 +279,15 @@ Have fun playing around with queries, after all, it's a _playground_!
 
 ## Publish the Project {: #publish-the-project }
 
-Subsquid offers a SaaS solution to host projects created by its community. All templates ship with a deployment manifest file named `squid.yml`, which can be used, in conjunction to the Squid CLI command `sqd deploy`.
+Subsquid offers a SaaS solution to host projects created by its community. All templates ship with a deployment manifest file named `squid.yml`, which can be used in conjunction with the `sqd deploy` command to deploy the projects there.
 
 Please refer to the [Deploy your Squid section](https://docs.subsquid.io/deploy-squid/quickstart/){target=_blank} on Subquid's documentation site for more information.
 
 ## Example Project Repository {: #example-project-repository }
 
-You can view the template used here, as well as many other example repositories [on Subsquid's examples organization on GitHub](https://github.com/orgs/subsquid-labs/repositories){target=_blank}.
+You can view the template used here, as well as many other example repositories [on the Subsquid Labs GitHub page](https://github.com/orgs/subsquid-labs/repositories){target=_blank}.
 
-[Subsquid's documentation](https://docs.subsquid.io/){target=_blank} contains informative material, and it's the best place to start, if you are curious about some aspects that were not fully explained in this guide.
+[Subsquid's documentation](https://docs.subsquid.io/){target=_blank} contains informative material, and it's the best place to start if you are curious about any aspects that were not fully explained in this guide.
 
 --8<-- 'text/disclaimers/educational-tutorial.md'
 

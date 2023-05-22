@@ -169,10 +169,6 @@ This approach enables seamless indexing of Substrate and EVM data from Moonbeam,
           });
         ```
 
-Your new Subsquid indexer is now configured to use Moonbeam data. Get started with the development by following the [Substrate quickstart guide](https://docs.subsquid.io/quickstart/quickstart-substrate/){target=_blank}. Take a look at the [Frontier EVM support page](https://docs.subsquid.io/substrate-indexing/evm-support/){target=_blank} if you want to index EVM data within a Substrate-native indexer.
-
-If you're interested in a step-by-step tutorial to get started indexing data on Moonbeam, you can check out the [Index NFT Token Transfers on Moonbeam with Subsquid](/tutorials/integrations/nft-subsquid){target=_blank} tutorial!
-
-[//]: # (!!!! Make sure that the final tutorial is in the appropriate section for its style)
+Your new Subsquid indexer is now configured to use Moonbeam data. Get started with the development by following the [Substrate quickstart guide](https://docs.subsquid.io/quickstart/quickstart-substrate/){target=_blank}. Take a look at the [Frontier EVM support page](https://docs.subsquid.io/substrate-indexing/evm-support/){target=_blank} if you want to index EVM data within a Substrate-native indexer. For a step-by-step tutorial on building an indexer in this style, check out the [Index NFT Token Transfers on Moonbeam with Subsquid](/tutorials/integrations/nft-subsquid){target=_blank} page.
 
 --8<-- 'text/disclaimers/third-party-content.md'

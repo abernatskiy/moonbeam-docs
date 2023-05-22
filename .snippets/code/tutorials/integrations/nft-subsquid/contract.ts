@@ -4,7 +4,7 @@ import { BigNumber } from 'ethers';
 import { Context } from './processor';
 import { Contract } from './model';
 
-export const contractAddress = 'wss://moonbeam.api.onfinality.io/public-ws';
+export const contractAddress = '0xf27a6c72398eb7e25543d19fda370b7083474735';
 
 export async function createContractEntity(ctx: Context): Promise<Contract> {
   const lastBlock = ctx.blocks[ctx.blocks.length - 1].header;
